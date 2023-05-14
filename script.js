@@ -17,7 +17,7 @@ function updateScreen() {
     } else if (currentOperation) {
         upperScreen.innerText = currentOperation.a + currentOperation.opString;
         lowerScreen.innerText = currentOperation.b;
-        if (currentOperation.result) {
+        if (currentOperation.result != undefined) {
             upperScreen.innerText =
                 currentOperation.a +
                 currentOperation.opString +
