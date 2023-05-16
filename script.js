@@ -41,27 +41,27 @@ function newOperation(a) {
     };
 }
 function operate(operation) {
-    return operation.op(operation.a, operation.b);
+    return operation.op ? operation.op(operation.a, operation.b) : operation.a;
 }
 updateScreen();
 
 //INTERPRETER =============================================
 function interpret(string) {
     //LOGIC
-    let isNumber = !Number.isNaN(Number(string));
+    let isOperand = !Number.isNaN(Number(string)) || string == ".";
     const regexp = /[\+÷×-]/;
-    const updateFirstOperand = !currentOperation.op && isNumber;
+    const updateFirstOperand = !currentOperation.op;
     const updateSecondOperand =
-        currentOperation.op && !currentOperation.result && isNumber;
+        currentOperation.op && currentOperation.result == undefined;
     const updateOperation = regexp.test(string);
-    const hasResult = !!currentOperation.result;
+    const hasResult = currentOperation.result != undefined;
 
-    //STAGE 1 detect operation
+    //String is Operation?
     if (updateOperation) {
         if (hasResult) {
             currentOperation = newOperation(currentOperation.result);
         }
-        if (currentOperation.b) {
+        if (currentOperation.b != undefined) {
             currentOperation.result = operate(currentOperation);
             currentOperation = newOperation(currentOperation.result);
         }
@@ -84,20 +84,26 @@ function interpret(string) {
         }
     }
 
-    //STAGE 2 collect first operand
-    if (updateFirstOperand) {
-        let tempString = (currentOperation.a += string);
-        currentOperation.a = Number(tempString);
+    //String is operand?
+    if (isOperand) {
+        if (hasResult && string != '.') {
+            currentOperation = newOperation(string);
+        }
+        if (updateFirstOperand) {
+            console.log('dsa')
+            let tempString = (currentOperation.a += string);
+            if (tempString.slice(-1) != ".") {
+                currentOperation.a = Number(tempString);
+            }
+        }
+        if (updateSecondOperand) {
+            let tempString = (currentOperation.b += string);
+            if (tempString.slice(-1) != ".") {
+                currentOperation.b = Number(tempString);
+            }
+        }
     }
-
-    //STAGE 3 collect second operand
-    if (updateSecondOperand) {
-        let tempString = currentOperation.b
-            ? (currentOperation.b += string)
-            : string;
-        currentOperation.b = Number(tempString);
-    }
-    //STAGE 4 Other commands
+    //String is other commands?
     switch (string) {
         case "=":
             currentOperation.result = operate(currentOperation);
