@@ -41,23 +41,21 @@ function newOperation(a) {
     };
 }
 function operate(operation) {
-    return operation.op ? operation.op(operation.a, operation.b) : operation.a;
+    let result = operation.op(operation.a, operation.b);
+    if (result.toString().length > 14) {
+        result = Number.parseFloat(result).toExponential(5);
+    }
+    return operation.op ? result : operation.a;
 }
 updateScreen();
 
 //INTERPRETER =============================================
 function interpret(string) {
-    //LOGIC
-    let isOperand = !Number.isNaN(Number(string)) || string == ".";
-    const regexp = /[\+÷×-]/;
-    const updateFirstOperand = !currentOperation.op;
-    const updateSecondOperand =
-        currentOperation.op && currentOperation.result == undefined;
-    const updateOperation = regexp.test(string);
     const hasResult = currentOperation.result != undefined;
 
     //String is Operation?
-    if (updateOperation) {
+    const regexp = /[\+÷×-]/;
+    if (regexp.test(string)) {
         if (hasResult) {
             currentOperation = newOperation(currentOperation.result);
         }
@@ -65,7 +63,9 @@ function interpret(string) {
             currentOperation.result = operate(currentOperation);
             currentOperation = newOperation(currentOperation.result);
         }
-        if (!currentOperation.b) currentOperation.b = 0;
+        if (!currentOperation.b) {
+            currentOperation.b = 0;
+        }
 
         currentOperation.opString = string;
         switch (string) {
@@ -85,6 +85,11 @@ function interpret(string) {
     }
 
     //String is operand?
+    const isOperand = !Number.isNaN(Number(string)) || string == ".";
+    const updateFirstOperand = currentOperation.op === undefined;
+    const updateSecondOperand =
+        currentOperation.op !== undefined &&
+        currentOperation.result === undefined;
     if (isOperand) {
         if (hasResult && string != ".") {
             currentOperation = newOperation(string);
@@ -109,13 +114,17 @@ function interpret(string) {
 }
 function updateOperand(operand, string) {
     const alreadyDecimal = currentOperation[operand].toString().includes(".");
+    const tooLong = currentOperation[operand].toString().length > 12;
     if (string === "." && alreadyDecimal) return;
     let operandString;
     if (string === "DEL") {
         let tmp = currentOperation[operand].toString();
         operandString = tmp.substring(0, tmp.length - 1);
+        console.log("dsa");
     } else {
-        operandString = currentOperation[operand] += string;
+        if (!tooLong) {
+            operandString = currentOperation[operand] += string;
+        }
     }
     if (operandString.slice(-1) != ".") {
         currentOperation[operand] = Number(operandString);

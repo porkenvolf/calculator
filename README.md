@@ -1,7 +1,10 @@
 # calculator
 
+
+Bugs:
+numbers on upper screen modifies screen size
+
 To Do:
-- decimals
-- DEL
-- M (decide if implement or remove)
+- max char count
+- keyboard support
 - style
