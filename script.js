@@ -100,15 +100,25 @@ function interpret(string) {
         case "CE":
             currentOperation = newOperation(0);
             break;
+        case "DEL":
+            if (updateFirstOperand) updateOperand("a", string);
+            if (updateSecondOperand) updateOperand("b", string);
+            break;
     }
     console.table(currentOperation);
 }
 function updateOperand(operand, string) {
     const alreadyDecimal = currentOperation[operand].toString().includes(".");
     if (string === "." && alreadyDecimal) return;
-    let tempString = (currentOperation[operand] += string);
-    if (tempString.slice(-1) != ".") {
-        currentOperation[operand] = Number(tempString);
+    let operandString;
+    if (string === "DEL") {
+        let tmp = currentOperation[operand].toString();
+        operandString = tmp.substring(0, tmp.length - 1);
+    } else {
+        operandString = currentOperation[operand] += string;
+    }
+    if (operandString.slice(-1) != ".") {
+        currentOperation[operand] = Number(operandString);
     }
 }
 
