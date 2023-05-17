@@ -126,9 +126,15 @@ function updateOperand(operand, string) {
             operandString = currentOperation[operand] += string;
         }
     }
-    if (operandString.slice(-1) != ".") {
-        currentOperation[operand] = Number(operandString);
+
+    if (
+        (operandString.slice(-1) == 0 &&
+            currentOperation[operand].toString().includes(".")) ||
+        operandString.slice(-1) == "."
+    ) {
+        return;
     }
+    currentOperation[operand] = Number(operandString);
 }
 
 // MATH ===================================================
