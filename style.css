@@ -10,6 +10,7 @@ body {
     align-items: center;
 }
 #container {
+    margin: 20px;
     display: flex;
     flex-wrap: wrap;
     width: 400px;
