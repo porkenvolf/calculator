@@ -1,3 +1,4 @@
+const ERROR_MSG = "D'OH!";
 //BUTTONS =================================================
 const numberButtons = document.querySelectorAll("button");
 numberButtons.forEach((item) => {
@@ -70,16 +71,16 @@ function interpret(string) {
     //String is Operation?
     const regexp = /[\+÷×\-]/;
     if (regexp.test(string)) {
-        if (hasResult) {
+        /* if (hasResult) {
             currentOperation = newOperation(currentOperation.result);
-        }
-        if (
-            currentOperation.b != undefined &&
-            typeof currentOperation.result === "number"
-        ) {
+        } */
+        if (currentOperation.b != undefined || hasResult) {
             currentOperation.result = operate(currentOperation);
-            currentOperation = newOperation(currentOperation.result);
+            if (currentOperation.result !== ERROR_MSG) {
+                currentOperation = newOperation(currentOperation.result);
+            }
         }
+        
         if (!currentOperation.b) {
             currentOperation.b = 0;
         }
@@ -127,7 +128,7 @@ function interpret(string) {
             if (updateSecondOperand) updateOperand("b", string);
             break;
     }
-    //console.table(currentOperation);
+    console.table(currentOperation);
 }
 function updateOperand(operand, string) {
     const alreadyDecimal = currentOperation[operand].toString().includes(".");
@@ -167,5 +168,5 @@ function multiply(a, b) {
 function divide(a, b) {
     let doh = new Audio("doh.mp3");
     if (b == 0) doh.play();
-    return b != 0 ? a / b : "D'OH!";
+    return b != 0 ? a / b : ERROR_MSG;
 }
