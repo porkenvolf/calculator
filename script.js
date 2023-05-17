@@ -151,5 +151,7 @@ function multiply(a, b) {
     return a * b;
 }
 function divide(a, b) {
-    return b != 0 ? a / b : "DOH!";
+    let doh = new Audio("doh.mp3");
+    if (b == 0) doh.play();
+    return b != 0 ? a / b : "D'OH!";
 }
