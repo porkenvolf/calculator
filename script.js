@@ -59,7 +59,10 @@ function interpret(string) {
         if (hasResult) {
             currentOperation = newOperation(currentOperation.result);
         }
-        if (currentOperation.b != undefined) {
+        if (
+            currentOperation.b != undefined &&
+            typeof currentOperation.result === "number"
+        ) {
             currentOperation.result = operate(currentOperation);
             currentOperation = newOperation(currentOperation.result);
         }
@@ -148,5 +151,5 @@ function multiply(a, b) {
     return a * b;
 }
 function divide(a, b) {
-    return a / b;
+    return b != 0 ? a / b : "DOH!";
 }

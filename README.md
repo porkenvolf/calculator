@@ -2,7 +2,6 @@
 
 
 Bugs:
-- divide then multiply bug
 
 To Do:
 - margin in mobile
