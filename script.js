@@ -86,22 +86,11 @@ function interpret(string) {
 
     //String is operand?
     if (isOperand) {
-        if (hasResult && string != '.') {
+        if (hasResult && string != ".") {
             currentOperation = newOperation(string);
         }
-        if (updateFirstOperand) {
-            console.log('dsa')
-            let tempString = (currentOperation.a += string);
-            if (tempString.slice(-1) != ".") {
-                currentOperation.a = Number(tempString);
-            }
-        }
-        if (updateSecondOperand) {
-            let tempString = (currentOperation.b += string);
-            if (tempString.slice(-1) != ".") {
-                currentOperation.b = Number(tempString);
-            }
-        }
+        if (updateFirstOperand) updateOperand("a", string);
+        if (updateSecondOperand) updateOperand("b", string);
     }
     //String is other commands?
     switch (string) {
@@ -113,6 +102,14 @@ function interpret(string) {
             break;
     }
     console.table(currentOperation);
+}
+function updateOperand(operand, string) {
+    const alreadyDecimal = currentOperation[operand].toString().includes(".");
+    if (string === "." && alreadyDecimal) return;
+    let tempString = (currentOperation[operand] += string);
+    if (tempString.slice(-1) != ".") {
+        currentOperation[operand] = Number(tempString);
+    }
 }
 
 // MATH ===================================================
