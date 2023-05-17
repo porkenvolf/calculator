@@ -6,6 +6,20 @@ numberButtons.forEach((item) => {
         updateScreen();
     });
 });
+//KEYBOARD =================================================
+document.addEventListener("keydown", (event) => {
+    let name = event.key;
+    if (name === "/") name = "÷";
+    if (name === "*") name = "×";
+    if (name === "Enter") name = "=";
+    if (name === "Delete") name = "CE";
+    if (name === "Backspace") name = "DEL";
+    const regexp = /[\+-÷×123456789]/;
+    if (regexp.test(name)) {
+        interpret(name);
+        updateScreen();
+    }
+});
 
 //SCREEN ===================================================
 const lowerScreen = document.querySelector(".lowerScreen");
@@ -54,7 +68,7 @@ function interpret(string) {
     const hasResult = currentOperation.result != undefined;
 
     //String is Operation?
-    const regexp = /[\+÷×-]/;
+    const regexp = /[\+÷×\-]/;
     if (regexp.test(string)) {
         if (hasResult) {
             currentOperation = newOperation(currentOperation.result);
@@ -113,7 +127,7 @@ function interpret(string) {
             if (updateSecondOperand) updateOperand("b", string);
             break;
     }
-    console.table(currentOperation);
+    //console.table(currentOperation);
 }
 function updateOperand(operand, string) {
     const alreadyDecimal = currentOperation[operand].toString().includes(".");
