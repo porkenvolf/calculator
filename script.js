@@ -1,4 +1,5 @@
 const ERROR_MSG = "D'OH!";
+const doh = new Audio("doh.mp3");
 //BUTTONS =================================================
 const numberButtons = document.querySelectorAll("button");
 numberButtons.forEach((item) => {
@@ -165,8 +166,8 @@ function subtract(a, b) {
 function multiply(a, b) {
     return a * b;
 }
+
 function divide(a, b) {
-    let doh = new Audio("doh.mp3");
     if (b == 0) doh.play();
     return b != 0 ? a / b : ERROR_MSG;
 }
