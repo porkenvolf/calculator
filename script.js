@@ -31,13 +31,13 @@ function updateScreen() {
         upperScreen.innerText = "";
         lowerScreen.innerText = currentOperation.a;
     } else if (currentOperation) {
-        upperScreen.innerText = currentOperation.a + currentOperation.opString;
+        upperScreen.innerText = currentOperation.a + ' ' +currentOperation.opString;
         lowerScreen.innerText = currentOperation.b;
         if (currentOperation.result != undefined) {
             upperScreen.innerText =
-                currentOperation.a +
-                currentOperation.opString +
-                currentOperation.b +
+                currentOperation.a + ' ' +
+                currentOperation.opString + ' '+
+                currentOperation.b + ' ' +
                 "=";
             lowerScreen.innerText = currentOperation.result;
         }

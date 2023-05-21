@@ -9,21 +9,20 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background-color: #1F1F1F;
+    background-color: #1f1f1f;
     color: #ddd;
 }
-footer{
-    padding: 15px 0 ;
-    background-color: #28282A;
+footer {
+    padding: 15px 0;
+    background-color: #28282a;
     width: 100%;
     text-align: center;
 }
 a {
     color: #ddd;
     text-decoration: none;
-    
 }
-a:hover{
+a:hover {
     color: #2ca6f1;
 }
 #container {
@@ -39,32 +38,46 @@ a:hover{
     border-radius: 15px;
     border: 0;
     margin: 2px;
-    
+
     color: #ddd;
     flex: 1 1 22%;
     font-size: 60px;
+    transition: 0.1s;
 }
-#container .number{
+#container button:active {
+    transform: scale(0.95);
+}
+#container .number {
     font-size: 40px;
-    background-color: #28282A;
+    background-color: #28282a;
 }
-#container .operation{
-    background-color: #004A77;
-    color: #C2E7FF;
+#container .number:hover {
+    background-color: #383838;
+}
+#container .operation {
+    background-color: #004a77;
+    color: #c2e7ff;
+}
+#container .operation:hover {
+    background-color: #1785c9;
 }
 #container #equals {
     flex: 1 2 22%;
     background-color: #2ca6f1;
-} 
+}
+#container #equals:hover {
+    background-color: #6cc4fb;
+}
 #container #CE {
-
     font-size: 40px;
     flex: 2 2 70%;
     color: #a0dab1;
-    background-color: #0F5223;
+    background-color: #0f5223;
+}
+#container #CE:hover {
+    background-color: #16903a;
 }
 #container .screen {
-
     height: 20%;
     line-height: 0;
     border-radius: 15px;
@@ -74,7 +87,7 @@ a:hover{
     text-align: right;
     display: flex;
     flex-direction: column;
-    padding: 20px 10px ;
+    padding: 20px 10px;
 }
 .screen * {
     display: flex;
@@ -82,7 +95,6 @@ a:hover{
     justify-content: flex-end;
 }
 .upperScreen {
-
     font-size: 23px;
     flex: 2;
 }
