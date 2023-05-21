@@ -6,11 +6,28 @@ body {
     margin: 0;
     height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
+    background-color: #1F1F1F;
+    color: #ddd;
+}
+footer{
+    padding: 15px 0 ;
+    background-color: #28282A;
+    width: 100%;
+    text-align: center;
+}
+a {
+    color: #ddd;
+    text-decoration: none;
+    
+}
+a:hover{
+    color: #2ca6f1;
 }
 #container {
-    margin: 20px;
+    margin: 10% 20px;
     display: flex;
     flex-wrap: wrap;
     width: 400px;
@@ -19,25 +36,45 @@ body {
     row-gap: 0.7%;
 }
 #container button {
+    border-radius: 15px;
+    border: 0;
+    margin: 2px;
+    
+    color: #ddd;
     flex: 1 1 22%;
-    font-size: 20px;
+    font-size: 60px;
+}
+#container .number{
+    font-size: 40px;
+    background-color: #28282A;
+}
+#container .operation{
+    background-color: #004A77;
+    color: #C2E7FF;
 }
 #container #equals {
-    flex: 2 2 45%;
-}
+    flex: 1 2 22%;
+    background-color: #2ca6f1;
+} 
 #container #CE {
-    flex: 2 2 45%;
+
+    font-size: 40px;
+    flex: 2 2 70%;
+    color: #a0dab1;
+    background-color: #0F5223;
 }
 #container .screen {
 
+    height: 20%;
     line-height: 0;
-    border: 1px solid grey;
+    border-radius: 15px;
+    background-color: #3b3b3b;
     flex: 1 1 100%;
     font-size: 40px;
     text-align: right;
     display: flex;
     flex-direction: column;
-    padding: 20px 0 ;
+    padding: 20px 10px ;
 }
 .screen * {
     display: flex;
@@ -46,7 +83,7 @@ body {
 }
 .upperScreen {
 
-    font-size: 20px;
+    font-size: 23px;
     flex: 2;
 }
 .lowerScreen {

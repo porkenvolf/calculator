@@ -81,7 +81,7 @@ function interpret(string) {
                 currentOperation = newOperation(currentOperation.result);
             }
         }
-        
+
         if (!currentOperation.b) {
             currentOperation.b = 0;
         }
@@ -170,4 +170,12 @@ function multiply(a, b) {
 function divide(a, b) {
     if (b == 0) doh.play();
     return b != 0 ? a / b : ERROR_MSG;
+}
+// UI ======================================================
+
+const currentYearTag = document.querySelector("#currentYear");
+const currentYear = new Date().getFullYear();
+const firstYearTag = document.querySelector("#firstYear");
+if (!firstYearTag.innerHTML.includes(currentYear)) {
+    currentYearTag.innerHTML = currentYear + " - ";
 }
